@@ -5,7 +5,6 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: #fff;
-
   min-height: 100vh;
   background: #009fff; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -97,9 +96,6 @@ h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.register {
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -170,7 +166,7 @@ form {
 
 .footer-text {
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   opacity: 0.8;
   margin-top: 20px;
 }
@@ -213,12 +209,12 @@ h3 {
   gap: 70px;
 }
 
-.down {
+/* .down {
   position: absolute;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-}
+} */
 
 .contacts-text {
   color: #fff;
@@ -231,4 +227,25 @@ h3 {
 .title {
   font-size: 100px;
   font-weight: 900;
+}
+
+.password-description,
+.error-message {
+  color: #4d4c4c;
+  padding: 0px 20px;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  width: 100%;
+  color: #ec2f4b;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px 30px;
+  text-align: left;
+}
+
+.success-message {
+  color: #fff;
+  font-size: 90px;
 }

@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require_once __DIR__ . '/config/db.php';
 
 function isValidPass($data)
@@ -26,65 +29,48 @@ function isValidPass($data)
 }
 
 $email = $pass = "";
-$emailErr = $passErr = "";
+$emailErr = $passErr =  "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   $email = htmlspecialchars(trim($_POST["email"]));
   $pass = htmlspecialchars(trim($_POST["pass"]));
 
+
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $emailErr = "Enter valid email!";
   }
 
   if (!isValidPass($pass)) {
-    $passErr = "<p style='color:blue;'>" . "Weak password.";
+    $passErr = "*Weak password";
   }
 
-  if (empty($emailErr) && empty($passErr)) {
-    echo "<p style='color:green;'>✅ Registration succsed!</p>";
-    echo "<p style='color:green;'>" . "Strong password.";
-    $email = $pass = "";
-    header("Location: success.php");
-    exit();
-  } else // here is a problem
-    echo $emailErr, $passErr;
-  echo $email, $pass;
-  $email = $pass = "";
-  $_POST = [];
-  //header("Location: register.php")
+  $hash = password_hash($pass, PASSWORD_DEFAULT);
+
+
+  if (empty($emailErr) && empty($passErr) && isset($_POST["submit"])) {
+
+    // Insertion to database
+    $sql = "INSERT INTO users (email, password) VALUES (:email, :pass)";
+
+    $stmt = $pdo->prepare($sql);
+
+
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':pass', $hash);
+
+    try {
+      $stmt->execute();
+      $_SESSION["success"] = "Woohoo! You’re officially part of the family. 🎊";
+      header("Location: success.php");
+      exit;
+    } catch (PDOException $e) {
+      $_SESSION["success"] = "❌ An Error: " . $e->getMessage();
+      header("Location: " . $_SERVER["PHP_SELF"]);
+      exit;
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
 
@@ -98,8 +84,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <title>To Do Application</title>
   <!-- <link rel="icon" href="/img/favicon.ico" type="image/x-icon" /> -->
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
-  <link rel="stylesheet" href="public/css/reset.css" />
-  <link rel="stylesheet" href="public/css/style.css" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="reset.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,13 +123,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </header>
 
 
-    <main class="main ">
+    <main class="main">
       <h1>Register new user</h1>
       <div class="form-container">
-        <h2>Create account</h2>
+        <h2>Create an account</h2>
         <form action="<?php htmlentities($_SERVER["PHP_SELF"]) ?>" method="post">
           <input type="email" name="email" class="input email" placeholder="Your e-mail" required>
+          <?php echo "<span class='error-message'>$emailErr</span>"; ?>
+
+
           <input type="password" name="pass" class="input pass" placeholder="Your password" required>
+          <?php echo "<span class='error-message'>$passErr</span>"; ?>
+
+
+
+
+          <span class="password-description">Passwords should be: at least 8 characters. Include an uppercase and a lowercase, numbers and symbols characters</span>
           <input type="submit" value="CREATE USER ACCOUNT" class="input btn" name="submit">
         </form>
       </div>

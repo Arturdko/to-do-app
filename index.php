@@ -51,7 +51,7 @@
       <h3 class="descr">Fancy title and description</h3>
 
 
-      <button><a href="demo.php">Try demo</a></button>
+      <button><a href="login.php">Log in</a></button>
       <button><a href="register.php">Sign Up</a></button>
 
 
