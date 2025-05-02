@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+  header('Location: login.php');
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,9 +18,9 @@
   <title>To Do Application</title>
   <!-- <link rel="icon" href="/img/favicon.ico" type="image/x-icon" /> -->
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
-  <link rel="stylesheet" href="public/styles/reset.css" />
-  <!-- <link rel="stylesheet" href="public/styles/style.css" /> -->
-  <link rel="stylesheet" href="public/styles/home.css" />
+  <link rel="stylesheet" href="styles/reset.css" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <!-- <link rel="stylesheet" href="styles/app.css" /> -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,11 +38,7 @@
   <meta name="twitter:title" content="title" />
   <meta name="twitter:description" content="some text" />
   <meta name="twitter:image" content="https://example.com/preview.jpg" />
-  <style>
-    body {
-      /* background-image: url("/public/styles/bgi.jpg"); */
-    }
-  </style>
+
 </head>
 
 <body>
@@ -52,26 +58,17 @@
 
 
     <main class="main-page">
-      <h1 class="title" style="font-size: 60px;">Stay Organized. Boost Your Productivity.</h1>
-      <h2 class="subheading">A beautifully simple To-Do app that helps you take control of your time and tasks — anytime, anywhere.</h2>
-      <p class="description">Welcome to your personal productivity companion. Whether you're managing daily errands, long-term goals, or team projects, our intuitive and distraction-free interface lets you stay focused on what matters most. Add tasks, set priorities, and mark your progress — all in one place.
 
-        Key Highlights (can be in a bulleted list or icon grid)
-        🧠 Smart Task Management – Create, edit, and complete tasks effortlessly
-
-        🌙 Clean & Minimalist Design – No clutter, just clarity
-
-        🔒 Secure & Private – Your tasks are safe with us
-
-        📱 Fully Responsive – Works seamlessly on mobile, tablet, and desktop
-
-        ⏰ No More Missed Deadlines – Stay on track with built-in reminders (optional)</p>
-
-
-      <button><a href="login.php">Log in</a></button>
-      <button><a href="register.php">Sign Up</a></button>
-
-
+      <body>
+        <div class="container">
+          <div class="box">
+            <h2>To Do List</h2>
+            <input type="text" / placeholder="Write your task..." class="input-box">
+            <ul class="list"></ul>
+          </div>
+        </div>
+        <script src="/Script.js"></script>
+      </body>
     </main>
 
     <footer class="footer">
@@ -80,6 +77,7 @@
     </footer>
 
   </div>
+  <!-- <script src="/script.js"></script> -->
 </body>
 
 </html>

@@ -4,8 +4,7 @@ session_start();
 
 require_once __DIR__ . '/config/db.php';
 
-$email = $pass = "";
-$emailErr = "";
+$email = $pass = $emailErr = $loginErr = $user = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $email = htmlspecialchars(trim($_POST["email"]));
@@ -15,7 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $emailErr = "Enter valid email!";
   }
 
+
+
   if ((empty($emailErr)) && (isset($_POST["login"]))) {
+
 
     $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
     $stmt = $pdo->prepare($sql);
@@ -23,20 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
       $stmt->execute();
-      $stmt->fetch(PDO::FETCH_ASSOC);
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
       if ($user && password_verify($pass, $user['password'])) {
-        // Вход выполнен успешно
+
+        // Succesfull login:
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["email"] = $user["email"];
         $_SESSION["logged_in"] = true;
 
-        header("Location: /views/tasks.php");
+        header("Location: app.php");
         exit;
       } else {
-        $loginErr = "Неверный логин или пароль.";
+        $loginErr = "Wrong email or password!";
       }
     } catch (PDOException $e) {
-      $loginErr = "Ошибка базы данных: " . $e->getMessage();
+      $loginErr = "Database error: " . $e->getMessage();
     }
   }
 }
@@ -72,8 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <title>To Do Application</title>
   <!-- <link rel="icon" href="/img/favicon.ico" type="image/x-icon" /> -->
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
-  <link rel="stylesheet" href="reset.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles/reset.css" />
+  <link rel="stylesheet" href="styles/style.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,7 +116,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>Please log in:</h2>
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])  ?>" method="post">
           <input type="email" name="email" class="input email" placeholder="Your e-mail" required>
+          <?php echo "<span class='error-message'>$emailErr</span>" ?>
           <input type="password" name="pass" class="input pass" placeholder="Your password" required>
+          <?php echo "<span class='error-message'>$loginErr</span>" ?>
           <input type="submit" value="LOG IN" class="input btn" name="login">
           <button type="button" class="input btn"><a href="register.php">CREATE USER ACCOUNT</a></button>
           <a href="" class="forgot-pass">Forgot Your Password?</a>

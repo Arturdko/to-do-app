@@ -85,8 +85,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <!-- <link rel="icon" href="/img/favicon.ico" type="image/x-icon" /> -->
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/reset.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
           <span class="password-description">Passwords should be: at least 8 characters. Include an uppercase and a lowercase, numbers and symbols characters</span>
-          <input type="submit" value="CREATE USER ACCOUNT" class="input btn" name="submit">
+          <input type="submit" value="CREATE USER ACCOUNT" class="input btn margin" name="submit">
         </form>
       </div>
     </main>
