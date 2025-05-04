@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="public/styles/reset.css" />
   <!-- <link rel="stylesheet" href="public/styles/style.css" /> -->
   <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="media.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,11 +40,7 @@
   <meta name="twitter:title" content="title" />
   <meta name="twitter:description" content="some text" />
   <meta name="twitter:image" content="https://example.com/preview.jpg" />
-  <style>
-    body {
-      /* background-image: url("/public/styles/bgi.jpg"); */
-    }
-  </style>
+
 </head>
 
 <body>
@@ -55,6 +52,16 @@
         <nav class="nav-bar">
           <a href="index.php" target="_self"><img src="img/logo2.png" alt="logo of the site" class="logo"></a>
           <ul class="main-menu">
+            <li><a href="index.php" class="menu-link">HOME</a></li>
+            <li><a href="about.php" class="menu-link">ABOUT</a></li>
+            <li><a href="contacts.php" class="menu-link">CONTACTS</a></li>
+            <li><a href="login.php" class="btn btn-login">LOG IN</a></li>
+          </ul>
+        </nav>
+
+        <nav class="nav-bar-burger" style="display: none;">
+          <a href="index.php" target="_self"><img src="img/logo2.png" alt="logo of the site" class="logo"></a>
+          <ul class="main-menu-mobile">
             <li><a href="index.php" class="menu-link">HOME</a></li>
             <li><a href="about.php" class="menu-link">ABOUT</a></li>
             <li><a href="contacts.php" class="menu-link">CONTACTS</a></li>
@@ -83,36 +90,38 @@
               📱 Fully Responsive – Works seamlessly on mobile, tablet, and desktop
 
               ⏰ No More Missed Deadlines – Stay on track with built-in reminders (optional)</p>
+            <div class="buttons">
+              <a href="register.php" class="btn btn-reg">
+                <span class="content-wrapper">
+                  <span class="btn-text">
+                    SIGN UP
+                  </span>
+                  <span class="btn-icon">
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                    </svg>
+                  </span>
 
-            <a href="register.php" class="btn btn-reg">
-              <span class="content-wrapper">
-                <span class="btn-text">
-                  SIGN UP
                 </span>
-                <span class="btn-icon">
-                  <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                  </svg>
-                </span>
+              </a>
+              <a href="about.php" class="btn btn-info">
+                <span class="content-wrapper">
+                  <span class="btn-text">
+                    MORE INFO
+                  </span>
+                  <span class="btn-icon">
+                    <svg class="arrow-second" xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                    </svg>
+                  </span>
 
-              </span>
-            </a>
-            <a href="about.php" class="btn btn-info">
-              <span class="content-wrapper">
-                <span class="btn-text">
-                  MORE INFO
                 </span>
-                <span class="btn-icon">
-                  <svg class="arrow-second" xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                  </svg>
-                </span>
+              </a>
+            </div>
 
-              </span>
-            </a>
 
           </div>
-          <img class="image first-img" src="img/mehrpouya-h-YdQ_Ick_qBQ-unsplash.jpg" alt="">
+          <img class="image first-img" src="img/mehrpouya-h-YdQ_Ick_qBQ-unsplash.jpg" alt="women with smartphone">
 
         </div>
       </div>
