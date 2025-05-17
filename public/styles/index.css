@@ -3,42 +3,13 @@
 #2185fc #2b90fd #0f5bb8 #009fff #4d4c4c 
 */
 
-/* default for desktops */
-
-html {
-  font-size: 16px;
-}
-
 body {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0 auto;
-  line-height: 1.5;
-  font-size: 1rem;
   font-family: "Inter", sans-serif;
-  font-weight: 400;
-  color: #4d4c4c;
-}
-
-/* CONTAINERS */
-.container {
-  max-width: 100%;
-  min-height: 100vh;
-  margin: 0 auto;
-}
-
-.header-container {
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fff;
 }
 
 .main-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   max-width: 98%;
-  min-height: 100vh;
+  height: 100%;
   margin: 0 auto;
   border-radius: 1.25rem;
   background: #2185fc; /* fallback for old browsers */
@@ -54,24 +25,15 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.content-container {
-  width: 1200px;
-  margin: 0 auto;
+.btn-container {
   display: flex;
-  gap: 100px;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-  gap: 40px;
+  justify-content: flex-start;
+  gap: 30px;
 }
 
 /* BUTTONS */
 
-.btn {
+.btn-my {
   display: inline-block;
   padding: 15px 30px;
   border: none;
@@ -85,14 +47,17 @@ body {
 
 .btn-login {
   background-color: #2185fc;
+  color: #fff;
 }
 
 .btn-login:hover {
   background-color: #2b90fd;
+  color: #fff;
 }
 
 .btn-login:active {
   background-color: #0f5bb8;
+  color: #fff;
 }
 
 .btn-reg {
@@ -106,14 +71,14 @@ body {
   border: 2px solid #0f5bb8;
 }
 
-.btn .btn-icon {
+.btn-my .btn-icon {
   display: inline-block;
   align-items: center;
   justify-content: center;
   transition: transform 0.6s ease;
 }
 
-.btn:hover .btn-icon {
+.btn-my:hover .btn-icon {
   transform: translateX(10px);
 }
 
@@ -132,25 +97,9 @@ body {
 
 /* HEADER */
 
-.nav-bar {
-  max-width: 1200px;
-  height: 150px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.main-menu {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 50px;
-}
-
 .logo {
-  width: 75px;
   height: 70px;
+  width: auto;
 }
 
 .menu-link {
@@ -179,6 +128,15 @@ body {
   left: 0;
 }
 
+.active {
+  border-bottom: 2px solid #2185fc;
+}
+
+.active:hover::after {
+  width: 0%;
+  left: 0;
+}
+
 /* MAIN */
 
 .title {
@@ -200,19 +158,10 @@ body {
   margin-bottom: 50px;
 }
 
-.description {
-  display: none;
-}
-
 .image {
-  width: 40%;
-  height: 40%;
+  width: auto;
+  height: 80%;
   border-radius: 20px;
-  align-self: center;
-}
-
-.second-img {
-  display: none;
 }
 
 .content-wrapper {
@@ -238,4 +187,85 @@ body {
 .footer-text {
   margin: 30px auto;
   text-align: center;
+}
+
+@media (min-width: 500px) and (max-width: 599px) {
+  .title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0.125rem;
+  }
+
+  .subheading {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .footer-text {
+    font-size: 0.9rem;
+  }
+
+  /* BUTTONS */
+  .btn-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .btn-my {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .btn-container {
+    justify-content: space-around;
+  }
+
+  .btn-info {
+    background-color: transparent;
+    border: 2px solid #0f5bb8;
+  }
+
+  .content-wrapper {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 750px) {
+  .title {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0.125rem;
+  }
+
+  .subheading {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .footer-text {
+    font-size: 1.1rem;
+  }
+
+  /* BUTTONS */
+
+  .btn-my {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .btn-info {
+    background-color: transparent;
+    border: 2px solid #0f5bb8;
+  }
+
+  .btn-container {
+    justify-content: space-around;
+  }
+
+  .content-wrapper {
+    justify-content: center;
+  }
 }
