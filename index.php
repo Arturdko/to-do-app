@@ -86,7 +86,7 @@
   </header>
 
   <main>
-    <div class="main-container ">
+    <div class="main-container">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-12 col-lg-6 my-5">

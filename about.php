@@ -5,15 +5,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="to-do-application" />
-  <title>To Do Application</title>
-  <!-- <link rel="icon" href="/img/favicon.ico" type="image/x-icon" /> -->
+  <title>About the app</title>
+
+
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
-  <link rel="stylesheet" href="public/css/reset.css" />
-  <link rel="stylesheet" href="public/css/style.css" />
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="public/styles/reset.css" />
+  <link rel="stylesheet" href="public/styles/index.css?v=<?= filemtime('public/styles/index.css') ?>">
+  <link rel="stylesheet" href="public/styles/about.css?v=<?= filemtime('public/styles/about.css') ?>">
+
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="img/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="img/favicon/site.webmanifest" />
+
 
   <!-- Open Graph tegs -->
   <meta property="og:title" content="title" />
@@ -31,78 +52,82 @@
 </head>
 
 <body>
-  <div class="container">
+  <header>
+    <div class="container">
 
-    <header>
-      <nav class="nav-bar">
-        <a href="index.php" target="_self"><img src="img/logo.ico" alt="logo of the site" class="logo"></a>
-        <ul class="main-menu">
-          <li><a href="index.php" class="menu-link">Home</a></li>
-          <li><a href="about.php" class="menu-link">About</a></li>
-          <li><a href="contacts.php" class="menu-link">Contacts</a></li>
-        </ul>
+      <nav class="navbar navbar-expand-md my-4">
+        <div class="container-fluid">
+          <!-- Left: Logo -->
+          <a href="index.php" class="navbar-brand">
+            <img src="img/logo.png" alt="application logo" class="logo">
+          </a>
+
+          <!-- Mobile toggle button -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Right: Navigation links and button -->
+          <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav me-3">
+              <li class="nav-item">
+                <a class="nav-link menu-link me-5 " href="index.php">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link menu-link me-5 active" href="about.php">ABOUT</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link menu-link me-5" href="contacts.php">CONTACTS</a>
+              </li>
+            </ul>
+            <a class="btn-my btn-login" type="button" href="login.php">LOG IN</a>
+          </div>
+        </div>
       </nav>
+    </div>
+  </header>
 
-    </header>
-
-
-    <main>
+  <main>
+    <div class="container">
       <h1>Tailored with love & inspiration</h1>
-      <p class="about-text"> To Do Application is a simple and effective task management tool designed to help you organize your tasks and boost your productivity.
-
+      <p class="descrip"> <strong>Do More</strong> is a simple and effective task management tool designed to help you organize your tasks and boost your productivity.
         With its user-friendly interface, you can easily create, complete, and delete tasks, ensuring that you stay on top of your responsibilities.
       </p>
 
-      <p class="about-text">
-        <br>
-        Welcome to "To Do Application", your simple and efficient task management tool.
-        Whether you're managing your daily tasks, keeping track of work assignments, or organizing personal projects, To Do Application helps you stay on top of everything, effortlessly.
-      </p>
+      <div class="row align-items-center my-5 gap-5">
+        <div class="col-sm-12 col-md-12 col-lg">
+          <img class="rounded-4" src="img/features.jpg" alt="features">
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg">
+          <h3>FEATURES</h3>
+          <p class="about-text">Create tasks in just a couple of clicks, check them off when they’re finished, delete the ones you no longer need, and manage everything through a clean, intuitive interface.
+          </p>
+        </div>
+      </div>
 
-      <h3>Features</h3>
-      <p class="about-text">Create Tasks: Add tasks easily with just a few clicks.
-        <br>
-        Mark as Completed: Check off tasks once they're done to keep your list organized.
-        <br>
-        Delete Tasks: Remove tasks from your list when you no longer need them.
-        <br>
-        Simple Interface: An intuitive design that makes task management clear and easy.
-        <br>
-        Local Storage: Your tasks are stored locally for quick access, with no need for an internet connection.
-      </p>
-      <h3>How It Works</h3>
-      <p class="about-text">Using To Do Application is simple:<br>
+      <div class="row align-items-center my-5 gap-5">
+        <div class="col-12 col-md-12 col-lg order-2 order-lg-1">
+          <h3>HOW IT WORKS</h3>
+          <p class="about-text">Using the <strong>Do More</strong> is easy: add a task by typing it in and clicking “Add,” tick it off when it’s finished, and delete completed items to keep the list clear for new tasks.
+          </p>
+        </div>
+        <div class="col-12 col-md-12 col-lg order-1 order-lg-2"><img class="rounded-4 " src="img/how_it_works.jpg" alt="how it works"></div>
+      </div>
 
-        Add Tasks: Type in your tasks and click the "Add" button to keep track of what needs to be done.<br>
+      <div class="row align-items-center my-5 gap-5">
+        <div class="col-12 col-md-12 col-lg"><img class="rounded-4" src="img/future_updates.jpg" alt="future updates"></div>
+        <div class="col-12 col-md-12 col-lg">
+          <h3>FUTURE UPDATES</h3>
+          <p class="about-text">We’re always improving <strong>Do More</strong> to make your task management even easier. Some features we’re planning to add in the future include: Cloud syncing to keep your tasks accessible across multiple devices. Task categories to help you organize your tasks more effectively. Advanced notifications to remind you of upcoming deadlines. Stay tuned for updates!</p>
+        </div>
 
-        Complete Tasks: When a task is finished, check it off, and watch your productivity grow!<br>
+      </div>
+    </div>
+  </main>
 
-        Delete Tasks: Finished tasks? Just delete them from the list and make space for new ones.<br>
-
-        Everything is stored locally, so you don’t need to worry about losing your data.</p>
-      <h3>Future Updates</h3>
-      <p class="about-text">We’re always improving To Do Application to make your task management even easier. Some features we’re planning to add in the future include:
-
-        Cloud syncing to keep your tasks accessible across multiple devices.
-
-        Task categories to help you organize your tasks more effectively.
-
-        Advanced notifications to remind you of upcoming deadlines.
-
-        Stay tuned for updates!</p>
-
-      <h3>Contact Me</h3>
-      <p class="about-text">I will appreciate your feedback and suggestions. If you have any questions, comments, or ideas for improvement, please reach me out at:
-        <a href="mailto:arturdko@gmail.com" class="email-class">arturdko@gmail.com
-        </a>
-
-
-    </main>
-
-    <footer class=" footer">
-
-      <p class="footer-text">© 2025 <a href="mailto:arturdko@gmail.com" class="email-class"> Made by me. </a>Made with ❤️ and lots of coffee.</p>
-    </footer>
+  <footer class="footer-text">
+    <p>© 2025 Made with ❤️ and lots of coffee in Budweis. South Bohemia </p>
+  </footer>
 
 
 
@@ -113,7 +138,12 @@
 
 
 
-  </div>
+
+
+
+  <!-- Bootstrap 5 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
