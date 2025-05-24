@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="to-do-application" />
-  <title>Do More</title>
+  <title>Do More - Simple & Free App</title>
 
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
   <!-- Bootstrap 5 CSS CDN -->
@@ -125,7 +125,7 @@
           </div>
 
           <div class="col-12 col-lg-6 my-5">
-            <img class="image image-fluid d-none d-lg-block" src="img/mehrpouya-h-YdQ_Ick_qBQ-unsplash.jpg" alt="Woman with smartphone">
+            <img class="image image-fluid d-none d-lg-block" src="img/main_picture.jpg" alt="Woman with smartphone">
           </div>
         </div>
       </div>
@@ -133,8 +133,25 @@
 
   </main>
 
-  <footer class="footer-text">
-    <p>© 2025 Made with ❤️ and lots of coffee in Budweis. South Bohemia </p>
+  <footer class="footer-text py-3">
+    <ul class="socials my-4">
+      <li>
+        <a href="mailto:arturdko@gmail.com" class="social-link" target="_blank">
+          <img src="img/gmail.png" class="social-link" alt="gmail_icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/Arturdko" class="social-link" target="_blank">
+          <img src="img/github.png" class="social-link" alt="github_icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/arturdko" class="social-link" target="_blank">
+          <img src="img/linkedin.png" class="social-link" alt="linkedin_icon">
+        </a>
+      </li>
+    </ul>
+    <p class="mb-0">© 2025 Made with ❤️ and lots of coffee in Budweis. South Bohemia </p>
   </footer>
 
 
