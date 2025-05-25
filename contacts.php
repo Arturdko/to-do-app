@@ -1,5 +1,23 @@
 <?php
-$nameErr = $emailErr = "";
+
+session_start();
+
+require_once __DIR__ . '/config/db.php';
+
+$email = $name = $text = $nameErr = $emailErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $name = htmlspecialchars(trim($_POST["name"]));
+  $email = htmlspecialchars(trim($_POST["email"]));
+  $text = htmlspecialchars(trim($_POST["text"]));
+
+  if (!filter_var($email, FILTER_SANITIZE_EMAIL)) {
+    $emailErr = "Enter valid email";
+  }
+
+  if (empty($emailErr) && isset($_POST['login'])) {
+  }
+}
 
 
 
@@ -105,17 +123,18 @@ $nameErr = $emailErr = "";
 
         <div class="col-md-6">
           <h1>Write me a message</h1>
+
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
 
             <input type="text" name="name" class="input mb-2 form-control" placeholder="Your Name" required>
-            <?php echo "<span class='error-message'>$nameErr</span>" ?>
+
 
             <input type="email" name="email" class="input mb-2 form-control" placeholder="Your email" required>
             <?php echo "<span class='error-message'>$emailErr</span>" ?>
 
             <textarea class="input comment form-control mb-2" rows="5" class="comment" name="text" placeholder="Message"></textarea>
 
-            <button type="button" class="input btn-login">SEND MESSAGE</button>
+            <input type="submit" value="SEND MESSAGE" class="input btn-login" name="login">
           </form>
         </div>
 
