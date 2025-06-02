@@ -63,11 +63,13 @@ body {
 
 .btn-reg {
   /* margin: 30px 30px 0 0; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border: 2px solid #0f5bb8;
   background-color: #0f5bb8;
 }
 
 .btn-info {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background-color: transparent;
   border: 2px solid #0f5bb8;
 }

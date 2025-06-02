@@ -28,8 +28,7 @@ function isValidPass($data)
   return true;
 }
 
-$email = $pass = "";
-$emailErr = $passErr =  "";
+$email = $pass = $emailErr = $passErr =  "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 

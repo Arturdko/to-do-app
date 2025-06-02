@@ -1,9 +1,61 @@
 <?php
-$nameErr = $emailErr = "";
 
+session_start();
 
+$email = $name = $text = $emailRaw = "";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  // Sanitize inputs
+  $name = htmlspecialchars(trim($_POST["name"]));
+  $emailRaw = trim($_POST["email"]);
+  $email = filter_var($emailRaw, FILTER_VALIDATE_EMAIL);
+  $text = htmlspecialchars(trim($_POST["text"]));
+
+  if (!$email) {
+    echo "<p style='color:red;'>Invalid email address.</p>";
+    return;
+  }
+
+  $to = "arturdko@gmail.com";
+  $subject = "Message from $name <$email>";
+  $message = $text . "\n\nFrom: $name <$email>";
+
+  // Important: Proper mail headers
+  $headers = "From: $name <$email>\r\n";
+  $headers .= "Reply-To: $email\r\n";
+  $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+  // Only send if the submit button was pressed
+  if (!empty($text) && isset($_POST["submit"])) {
+    if (mail($to, $subject, $message, $headers)) {
+      echo
+      "<div class='alert alert-success alert-dismissible fade show'>
+      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      <strong>Success! </strong>Your message was sent to Artur 😎</div>";
+      $email = $name = $text = "";
+    } else {
+      echo
+      "<div class='alert alert-danger alert-dismissible fade show'>
+      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      <strong>Error! </strong>Send error! Please try again later.</div>";
+    }
+  } else {
+    echo
+    "<div class='alert alert-warning alert-dismissible fade show'>
+      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      I will appriciate if you write me something 😇</div>";
+  }
+}
 ?>
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,6 +109,7 @@ $nameErr = $emailErr = "";
 </head>
 
 <body>
+
   <header>
     <div class="container">
       <nav class="navbar navbar-expand-md my-4">
@@ -105,17 +158,18 @@ $nameErr = $emailErr = "";
 
         <div class="col-md-6">
           <h1>Write me a message</h1>
+
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
 
             <input type="text" name="name" class="input mb-2 form-control" placeholder="Your Name" required>
-            <?php echo "<span class='error-message'>$nameErr</span>" ?>
+
 
             <input type="email" name="email" class="input mb-2 form-control" placeholder="Your email" required>
-            <?php echo "<span class='error-message'>$emailErr</span>" ?>
+
 
             <textarea class="input comment form-control mb-2" rows="5" class="comment" name="text" placeholder="Message"></textarea>
 
-            <button type="button" class="input btn-login">SEND MESSAGE</button>
+            <input type="submit" value="SEND MESSAGE" class="input btn-login" name="submit">
           </form>
         </div>
 
