@@ -169,7 +169,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <textarea class="input comment form-control mb-2" rows="5" class="comment" name="text" placeholder="Message"></textarea>
 
-            <input type="submit" value="SEND MESSAGE" class="input btn-login" name="submit">
+            <<<<<<< HEAD
+              <input type="submit" value="SEND MESSAGE" class="input btn-login" name="submit">
+              =======
+              <input type="submit" value="SEND MESSAGE" class="input btn-login" name="login">
+              >>>>>>> 72c53f4579f785a9fa08d7f75ec3b78d099fde42
           </form>
         </div>
 
