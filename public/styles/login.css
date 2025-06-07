@@ -92,6 +92,7 @@ form {
 }
 
 .forgot-pass {
+  color: #2b90fd;
   font-size: 16px;
   text-decoration: underline;
   margin: 20px 0;
@@ -186,8 +187,8 @@ h3 {
   color: #ec2f4b;
   font-size: 18px;
   font-weight: 600;
-  margin: 0 0 20px 30px;
-  text-align: left;
+  /* margin: 0 0 20px 30px; */
+  text-align: center;
 }
 
 .success-message {

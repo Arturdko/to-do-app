@@ -4,52 +4,41 @@ session_start();
 
 require_once __DIR__ . '/config/db.php';
 
-$email = $pass = $emailErr = $loginErr = $user = "";
+$messErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $email = htmlspecialchars(trim($_POST["email"]));
-  $pass = htmlspecialchars(trim($_POST["pass"]));
-
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $emailErr = "Enter valid email!";
-  }
+  $email = filter_var(htmlspecialchars(trim($_POST["email"])), FILTER_VALIDATE_EMAIL);
 
 
+  $stmt = $pdo->prepare("SELECT password FROM users WHERE email = :email");
+  $stmt->execute(['email' => $email]);
+  $user = $stmt->fetch();
 
-  if ((empty($emailErr)) && (isset($_POST["login"]))) {
+  if ($user) {
+    $otp = random_int(100000, 999999);
+    $expires = date("Y-m-d H:i:s", strtotime("+30 minutes"));
 
+    $stmt = $pdo->prepare("UPDATE users SET reset_code = :code, reset_expires = :expires WHERE email = :email");
+    $stmt->execute([
+      'code' => $otp,
+      'expires' => $expires,
+      'email' => $email
+    ]);
 
-    $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':email', $email);
+    $to = $email;
+    $subject = "Password reset";
+    $message = "Yours one time password: $otp\nValid for 30 minutes.";
+    $headers = "From: no-reply@example.com\r\nContent-Type: text/plain; charset=UTF-8";
 
-    try {
-      $stmt->execute();
-      $user = $stmt->fetch(PDO::FETCH_ASSOC);
-      if ($user && password_verify($pass, $user['password'])) {
-
-        // Succesfull login:
-        $_SESSION["user_id"] = $user["id"];
-        $_SESSION["email"] = $user["email"];
-        $_SESSION["logged_in"] = true;
-
-        header("Location: app.php");
-        exit;
-      } else {
-        $loginErr = "Wrong email or password!";
-      }
-    } catch (PDOException $e) {
-      $loginErr = "Database error: " . $e->getMessage();
-    }
+    mail($to, $subject, $message, $headers);
+    header("Location: new_pass.php",);
+    $email = "";
+    exit;
+  } else {
+    $messErr = "No user with email: $email.";
   }
 }
-
-
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="to-do-application" />
-  <title>Log in page</title>
+  <title>Password reset</title>
 
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
   <!-- Bootstrap 5 CSS CDN -->
@@ -141,26 +130,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </header>
 
   <main class="main">
-    <h1>Log in to your account</h1>
     <div class="form-container">
-      <h2>Please log in:</h2>
+      <h2>Your email:</h2>
 
       <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])  ?>" method="post">
-
         <input type="email" name="email" class="input email" placeholder="Your e-mail" required>
-        <?php echo "<span class='error-message'>$emailErr</span>" ?>
-
-        <input type="password" name="pass" class="input pass" placeholder="Your password" required>
-        <?php echo "<span class='error-message'>$loginErr</span>" ?>
-        <input type="submit" value="LOG IN" class="input btn" name="login">
-        <button type="button" class="input btn"><a href="register.php">CREATE USER ACCOUNT</a></button>
-        <a href="pass_reset.php" class="forgot-pass">Forgot Your Password?</a>
+        <?php echo "<span class='error-message mt-3'>$messErr</span>" ?>
+        <input type="submit" value="RESET PASSWORD" class="input btn" name="submit">
       </form>
 
     </div>
   </main>
 
-  <footer class="footer-text py-3">
+  <footer class="footer-text py-3 fixed-bottom">
     <ul class="socials my-4">
       <li>
         <a href="mailto:arturdko@gmail.com" class="social-link" target="_blank">
@@ -180,14 +162,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </ul>
     <p class="mb-0">© 2025 Made with ❤️ and lots of coffee in Budweis. South Bohemia </p>
   </footer>
-
-
-
-
-
-
-
-
 
   <!-- Bootstrap 5 JS Bundle CDN -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -4,49 +4,85 @@ session_start();
 
 require_once __DIR__ . '/config/db.php';
 
-$email = $pass = $emailErr = $loginErr = $user = "";
+$email = $emailErr = $otp = $otpErr = $pass = $passErr = $confirm = $confirmErr = $otpExpired = $messSuccess = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $email = htmlspecialchars(trim($_POST["email"]));
+function isValidPass($data)
+{
+  if (strlen($data) < 8) {
+    return false;
+  }
+
+  if (!preg_match('/[A-Z]/', $data)) {
+    return false;
+  }
+
+  if (!preg_match('/[a-z]/', $data)) {
+    return false;
+  }
+
+  if (!preg_match('/[0-9]/', $data)) {
+    return false;
+  }
+
+  if (!preg_match('/[\W_]/', $data)) {
+    return false;
+  }
+  return true;
+};
+
+
+// Input validation:
+if (($_SERVER["REQUEST_METHOD"] === "POST") && isset($_POST["submit"])) {
+  $email = filter_var(htmlentities(trim($_POST["email"])), FILTER_VALIDATE_EMAIL);
+  $otp = htmlentities(trim($_POST["otp"]));
   $pass = htmlspecialchars(trim($_POST["pass"]));
+  $confirm = htmlspecialchars(trim($_POST["confirm"]));
 
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $emailErr = "Enter valid email!";
+  // take otp from db and compare with input one:
+  $stmt = $pdo->prepare("SELECT reset_code, reset_expires FROM users WHERE email = :email");
+  $stmt->execute(['email' => $email]);
+  $user = $stmt->fetch();
+
+
+  if ($user["reset_code"] !== $otp) {
+    $otpErr = "*One time password is wrong!";
+  }
+
+  if (!(strtotime($user['reset_expires']) < strtotime('+30 minutes'))) {
+    $otpExpired = "One time password was expired!";
+    exit;
+  }
+
+  if (!isValidPass($pass)) {
+    $passErr = "*Weak password";
+  }
+
+  if ($confirm !== $pass) {
+    $confirmErr = "*Password doesn't match!";
   }
 
 
+  // Saving new password
+  $hash = password_hash($pass, PASSWORD_DEFAULT);
 
-  if ((empty($emailErr)) && (isset($_POST["login"]))) {
+  if (empty($passErr) && empty($confirmErr) && empty($otpErr) && empty($otpExpired)) {
 
+    // Insertion to database
+    $stmt = $pdo->prepare("UPDATE users SET password = :pass, reset_code = NULL, reset_expires = NULL WHERE email = :email");
 
-    $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':email', $email);
+    $stmt->execute([
+      'pass' => $hash,
+      'email' => $email
+    ]);
 
-    try {
-      $stmt->execute();
-      $user = $stmt->fetch(PDO::FETCH_ASSOC);
-      if ($user && password_verify($pass, $user['password'])) {
-
-        // Succesfull login:
-        $_SESSION["user_id"] = $user["id"];
-        $_SESSION["email"] = $user["email"];
-        $_SESSION["logged_in"] = true;
-
-        header("Location: app.php");
-        exit;
-      } else {
-        $loginErr = "Wrong email or password!";
-      }
-    } catch (PDOException $e) {
-      $loginErr = "Database error: " . $e->getMessage();
-    }
+    $messSuccess = "Your new password was created! You will be automatically redirected to login page." .
+      "<script>
+    setTimeout(function() {
+      window.location.href = 'login.php';
+    }, 5000);
+  </script>";
   }
 }
-
-
-
-
 ?>
 
 
@@ -58,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="to-do-application" />
-  <title>Log in page</title>
+  <title>New password</title>
 
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
   <!-- Bootstrap 5 CSS CDN -->
@@ -141,20 +177,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </header>
 
   <main class="main">
-    <h1>Log in to your account</h1>
     <div class="form-container">
-      <h2>Please log in:</h2>
+      <h2>Create new password:</h2>
 
       <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])  ?>" method="post">
-
         <input type="email" name="email" class="input email" placeholder="Your e-mail" required>
         <?php echo "<span class='error-message'>$emailErr</span>" ?>
-
-        <input type="password" name="pass" class="input pass" placeholder="Your password" required>
-        <?php echo "<span class='error-message'>$loginErr</span>" ?>
-        <input type="submit" value="LOG IN" class="input btn" name="login">
-        <button type="button" class="input btn"><a href="register.php">CREATE USER ACCOUNT</a></button>
-        <a href="pass_reset.php" class="forgot-pass">Forgot Your Password?</a>
+        <input type="text" name="otp" class="input pass" placeholder="OTP" required>
+        <?php echo "<span class='error-message'>$otpErr</span>" ?>
+        <?php echo "<span class='error-message'>$otpExpired</span>" ?>
+        <input type="password" name="pass" class="input pass" placeholder="New password" required>
+        <?php echo "<span class='error-message'>$passErr</span>" ?>
+        <input type="password" name="confirm" class="input pass" placeholder="Repeate password" required>
+        <?php echo "<span class='error-message'>$confirmErr</span>" ?>
+        <input type="submit" value="SAVE" class="input btn" name="submit">
+        <?php echo
+        "<span class='error-message' style='color: green; text-align: center;'>$messSuccess</span>"
+        ?>
       </form>
 
     </div>
@@ -180,14 +219,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </ul>
     <p class="mb-0">© 2025 Made with ❤️ and lots of coffee in Budweis. South Bohemia </p>
   </footer>
-
-
-
-
-
-
-
-
 
   <!-- Bootstrap 5 JS Bundle CDN -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
