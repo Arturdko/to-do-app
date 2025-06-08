@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 if (!isset($_SESSION['user_id'])) {
   header('Location: login.php');
   exit;
@@ -60,114 +61,120 @@ if (!isset($_SESSION['user_id'])) {
 
 </head>
 
-
-<header>
-  <div class="container">
-
-    <nav class="navbar navbar-expand-md my-4">
-      <div class="container-fluid">
-        <!-- Left: Logo -->
-        <a href="index.php" class="navbar-brand">
-          <img src="img/logo.png" alt="application logo" class="logo">
-        </a>
-
-        <!-- Mobile toggle button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Right: Navigation links and button -->
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-          <ul class="navbar-nav me-3">
-            <li class="nav-item">
-              <a class="nav-link menu-link me-5 text-white" href="index.php">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link menu-link me-5 text-white" href="about.php">ABOUT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link menu-link me-5 text-white" href="contacts.php">CONTACTS</a>
-            </li>
-          </ul>
-          <a class="btn-my btn-login" type="button" href="login.php">LOG OUT</a>
-        </div>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-</main>
-
-<footer class="footer-text py-3 fixed-bottom">
-  <ul class="socials my-4">
-    <li>
-      <a href="mailto:arturdko@gmail.com" class="social-link" target="_blank">
-        <img src="img/gmail.png" class="social-link" alt="gmail_icon">
-      </a>
-    </li>
-    <li>
-      <a href="https://github.com/Arturdko" class="social-link" target="_blank">
-        <img src="img/github.png" class="social-link" alt="github_icon">
-      </a>
-    </li>
-    <li>
-      <a href="https://www.linkedin.com/in/arturdko" class="social-link" target="_blank">
-        <img src="img/linkedin.png" class="social-link" alt="linkedin_icon">
-      </a>
-    </li>
-  </ul>
-  <p class="mb-0">© 2025 Made with ❤️ and lots of coffee in Budweis. South Bohemia </p>
-</footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Bootstrap 5 JS Bundle CDN -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 <body>
+  <header>
+    <div class="container">
+
+      <nav class="navbar navbar-expand-md my-4">
+        <div class="container-fluid">
+          <!-- Left: Logo -->
+          <a href="index.php" class="navbar-brand">
+            <img src="img/logo.png" alt="application logo" class="logo">
+          </a>
+
+          <!-- Mobile toggle button -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Right: Navigation links and button -->
+          <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav me-3">
+              <li class="nav-item">
+                <a class="nav-link menu-link me-5 text-white" href="index.php">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link menu-link me-5 text-white" href="about.php">ABOUT</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link menu-link me-5 text-white" href="contacts.php">CONTACTS</a>
+              </li>
+            </ul>
+            <a class="btn-my btn-login" type="button" href="logout.php">LOG OUT</a>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1 class="my-5">To Do List</h1>
+      <form action="<?php htmlentities($_SERVER["PHP_SELF"]) ?>" method="post">
+        <input type="text" name="task" placeholder="Add a task" class="input-box">
+        <button class="btn" name="submit">Add</button>
+      </form>
+      <ul class="task-list"></ul>
+    </div>
+  </main>
 
 
 
 
 
+  <!-- <footer class="footer-text py-3 fixed-bottom">
+    <ul class="socials my-4">
+      <li>
+        <a href="mailto:arturdko@gmail.com" class="social-link" target="_blank">
+          <img src="img/gmail.png" class="social-link" alt="gmail_icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/Arturdko" class="social-link" target="_blank">
+          <img src="img/github.png" class="social-link" alt="github_icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/arturdko" class="social-link" target="_blank">
+          <img src="img/linkedin.png" class="social-link" alt="linkedin_icon">
+        </a>
+      </li>
+    </ul>
+    <p class="mb-0">© 2025 Made with ❤️ and lots of coffee in Budweis. South Bohemia </p>
+  </footer> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="public/scripts/script.js"></script>
+  <!-- Bootstrap 5 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

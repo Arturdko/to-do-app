@@ -4,6 +4,13 @@ session_start();
 
 $message = '';
 
+$messSuccess = "You will be automatically redirected to login page." .
+  "<script>
+    setTimeout(function() {
+      window.location.href = 'login.php';
+    }, 5000);
+  </script>";
+
 if (isset($_SESSION["success"])) {
   $message = $_SESSION["success"];
   unset($_SESSION["success"]);
@@ -103,7 +110,8 @@ if (isset($_SESSION["success"])) {
 
     <main class="main-page mt-5">
       <?php echo "<h1 class='success-message'>$message</h1>"; ?>
-      <h1 class="success-message">Now you can <a class="login" href="login.php">log in</a></h1>
+      <?php echo "<h1 class='success-message'>$messSuccess</h1>"; ?>
+      <!-- <h1 class="success-message">Now you can <a class="login" href="login.php">log in</a></h1> -->
     </main>
 
 

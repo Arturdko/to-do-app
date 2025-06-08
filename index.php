@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +82,11 @@
                 <a class="nav-link menu-link me-5" href="contacts.php">CONTACTS</a>
               </li>
             </ul>
-            <a class="btn-my btn-login" type="button" href="login.php">LOG IN</a>
+            <?php if (isset($_SESSION["user_id"])): ?>
+              <a class="btn-my btn-login" type="button" href="logout.php">LOG OUT</a>
+            <?php else: ?>
+              <a class="btn-my btn-login" type="button" href="login.php">LOG IN</a>
+            <?php endif ?>
           </div>
         </div>
       </nav>
