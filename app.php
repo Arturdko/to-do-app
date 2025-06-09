@@ -101,12 +101,15 @@ if (!isset($_SESSION['user_id'])) {
   <main>
     <div class="container">
       <h1 class="my-5">To Do List</h1>
-      <form action="<?php htmlentities($_SERVER["PHP_SELF"]) ?>" method="post">
-        <input type="text" name="task" placeholder="Add a task" class="input-box">
-        <button class="btn" name="submit">Add</button>
+      <form action="<?php echo htmlentities($_SERVER["PHP_SELF"]) ?>" method="post">
+        <div class="input-wrapper">
+          <input type="text" name="task" placeholder="Add a task" class="task-input">
+          <button type="submit" name="submit" class="add-btn"><span>+</span></button>
+        </div>
       </form>
       <ul class="task-list"></ul>
     </div>
+
   </main>
 
 
@@ -172,7 +175,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
 
-  <script src="public/scripts/script.js"></script>
+  <script src="public/scripts/script.js?v=<?= filemtime('public/scripts/script.js') ?>"></script>
   <!-- Bootstrap 5 JS Bundle CDN -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

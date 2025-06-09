@@ -21,13 +21,116 @@ h1 {
   margin-bottom: 20px;
 }
 
-.input-box {
+.task-input {
   width: 100%;
-  padding: 15px 20px;
+  padding: 10px 45px 10px 10px;
   border: none;
   outline: none;
   border-radius: 30px;
   font-weight: 600;
   font-size: 18px;
   color: rgb(90, 89, 89);
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.add-btn {
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  transform: translateY(-50%);
+  padding: 6px 14px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.add-btn span {
+  font-size: 21px;
+}
+
+.add-btn:hover {
+  background-color: #2b90fd;
+}
+
+.delete-btn {
+  background-color: #ff6f3c;
+}
+
+.done-btn {
+  order: -1;
+  align-self: center;
+}
+
+.done-btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+  background-color: #eee;
+  border: 0px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.done-btn:checked {
+  background-color: #4caf50;
+  color: #eee;
+  border-color: #4caf50;
+}
+
+.task-done {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.li-done {
+  background-color: rgb(73, 67, 67);
+}
+
+.hidden {
+  display: none;
+}
+
+.box::-webkit-scrollbar {
+  width: 0px;
+}
+
+.task-list li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  color: #fff;
+  font-size: 24px;
+  margin: 20px 0;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background-color: grey;
+}
+
+button {
+  border-radius: 50%;
+  padding: 4px 10px;
+  margin-left: 20px;
+  border: none;
+  color: #155263;
+  font-weight: 800;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.task-done {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
