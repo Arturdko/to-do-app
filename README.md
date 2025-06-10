@@ -7,7 +7,7 @@ A simple and stylish To Do app built with **PHP**, **MySQL**, **HTML/CSS/JS**.
 - ✅ Add tasks
 - ❌ Delete tasks
 - ✏️ Edit tasks
-- 💾 Store tasks in a MySQL database
+- 💾 Store tasks in local storage
 - 👤 User registration and login
 - 🎨 Responsive design
 
