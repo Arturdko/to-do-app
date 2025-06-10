@@ -40,9 +40,9 @@ h1 {
 .add-btn {
   position: absolute;
   top: 50%;
-  right: 1px;
+  right: 0px;
   transform: translateY(-50%);
-  padding: 6px 14px;
+  padding: 7.7px 16px;
   border: none;
   background-color: #007bff;
   color: white;
@@ -90,11 +90,6 @@ h1 {
 
 .task-done {
   text-decoration: line-through;
-  color: grey;
-}
-
-.li-done {
-  background-color: rgb(73, 67, 67);
 }
 
 .hidden {
@@ -105,6 +100,9 @@ h1 {
   width: 0px;
 }
 
+ul {
+  padding-left: 0 !important;
+}
 .task-list li {
   width: 100%;
   display: flex;
@@ -116,7 +114,11 @@ h1 {
   margin: 20px 0;
   padding: 10px 20px;
   border-radius: 30px;
-  background-color: grey;
+  background-color: #0f5bb8;
+}
+
+li.li-done {
+  background-color: #0f5bb893;
 }
 
 button {
@@ -128,9 +130,4 @@ button {
   font-weight: 800;
   font-size: 18px;
   cursor: pointer;
-}
-
-.task-done {
-  text-decoration: line-through;
-  opacity: 0.6;
 }
