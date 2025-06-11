@@ -1,8 +1,8 @@
 <?php
-$host = "localhost";
-$db = "todo_app";
-$user = "root";
-$pass = "";
+$host = "sql300.infinityfree.com";
+$db = "if0_39202501_domore_app";
+$user = "if0_39202501";
+$pass = "2u13no8xdm";
 
 
 try {

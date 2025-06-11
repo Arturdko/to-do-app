@@ -52,9 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
   <!-- Bootstrap 5 CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="public/styles/reset.css" />
-  <link rel="stylesheet" href="public/styles/login.css?v=<?= filemtime('public/styles/login.css') ?>">
-  <link rel="stylesheet" href="public/styles/index.css?v=<?= filemtime('public/styles/index.css') ?>">
+  <link rel="stylesheet" href="public/styles/reset.css">
+  <link rel="stylesheet" href="public/styles/login.css">
+  <link rel="stylesheet" href="public/styles/index.css">
 
 
 
